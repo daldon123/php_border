@@ -1,0 +1,126 @@
+*{
+	margin:0px;
+}
+a:link{
+	text-decoration:none;
+}
+.titleh2{
+	width:500px;
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:10px;
+	margin-top:50px;
+}
+.sql{
+	width:500px;
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:50px;
+}
+.box{
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.box2{
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	display:flex;
+	justify-content:center;
+	margin-bottom:20px;
+}
+.box2>a{
+	padding:3px;
+	color:black;
+}
+tr,th,td{
+	text-align:center;
+}
+.formbox{
+	border:1px solid black;
+	border-radius:5px;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	width:300px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.formbox>form{
+	padding:5px;
+}
+.write{
+	width:200px;
+	border:1px solid black;
+	padding:5px;
+	text-align:center;
+	color:black;
+	float:right;
+	margin-bottom:10px;
+}
+.write:hover{
+	color:white;
+	background-color:black;
+}
+.writebox{
+	width:100%;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+.writeFormbox{
+	width:800px;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+.writeinput{
+	width:100%;
+}
+.titlea{
+	color:white;
+}
+.showbody{
+	width:1200px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.showbox{
+	width:100%;
+	margin-left:auto;
+	margin-right:auto;
+	border:1px solid black;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+.showboxs{
+	width:100%;
+	padding:10px 0px;
+	border-bottom:1px solid black;
+	display:flex;
+	justify-content:space-between;
+	text-align:center;
+	
+}
+.showboxscontent{
+	width:100%;
+	display:flex;
+	justify-content:space-between;
+	margin-top:30px;
+	padding:50px 0px;
+	text-align:center;
+}
+/* .showboxscontent>p{
+	display:flex;
+	align-items:center;
+} */
+.backbtn{
+	color:black;
+	border:1px solid black;
+	float:right;
+}
