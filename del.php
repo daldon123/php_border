@@ -2,10 +2,7 @@
 	$title = '삭제하기';
 	include('inc/header.php');
 	require('inc/function.php');
-?>
-<?php
-	$del = "delete from table01 where id={$id}";
-	mysqli_query($db,$del);
+	require('./del_sql.php');
 ?>
 <script>
 	alert('삭제되었습니다');

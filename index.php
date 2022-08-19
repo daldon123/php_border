@@ -2,10 +2,7 @@
 	$title = '게시판';
 	include('inc/header.php');
 	require('inc/function.php');
-
-	// *게시판 변수*
-	$write_sql = "select * from table01 where title like '%".$_GET["search"]."%' order by id desc limit {$start},20"; // 게시판의 데이터,검색기능 쿼리문
-	$write_res = mysqli_query($db, $write_sql);
+	require('./index_sql.php');
 ?>
 	<!-- 게시판 -->
 	<div class='box'>
@@ -21,7 +18,7 @@
 				while($row = mysqli_fetch_array($write_res)){
 			?>
 			<tr>
-				<td><?php echo $row['id']?></td>
+				<td><?php echo $row['id'] ?></td>
 				<td>
 					<a class='titlea' href="show.php?id=<?php echo $row['id'] ?>">
 						<?php echo $row['title'] ?>
@@ -30,7 +27,9 @@
 				<td><?php echo $row['name'] ?></td>
 				<td><?php echo $row['time'] ?></td>
 			</tr>
-			<?php } ?>
+			<?php 
+				} 
+			?>
 		</table>	
 	</div>
 	<!-- /게시판 -->

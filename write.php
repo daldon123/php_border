@@ -18,12 +18,6 @@
 		</form>
 	</div>
 <?php
-
-	$insert_sql = "insert into table01(title, content, time, name, image) values( '{$title}', '{$content}' , now() , '{$name}' ,'{$newImage}')";
-	if($title == true && $name == true && $content == true){
-		mysqli_query($db, $insert_sql);
-		Header("Location:./index.php");
-	}
-
+	require('./write_sql.php');
 	include('inc/footer.php');
 ?>

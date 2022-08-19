@@ -9,7 +9,18 @@
 			<input type='text' id='title' name='title' placeholder='제목을 입력하세요' class='writeinput' value='<?php echo $r_title ?>' required/>
 			<label for='name'>닉네임</label>
 			<input type='text' id='name' name='name' placeholder='닉네임을 입력하세요' class='writeinput' value='<?php echo $r_name ?>' required/>
-			<textarea name='content' placeholder='내용을 입력해주세요' style='width:100%; height:300px; margin-top:20px;' required><?php echo $r_content ?></textarea>
+			<div  placeholder='내용을 입력해주세요' style='width:100%; height:300px; margin-top:20px; display:flex; flex-direction:column; align-items:center; border:1px solid black;' contentEditable="true" required>
+				<?php
+					if($r_image){
+						echo "<div style='width:40%'>";
+						echo "<img style='width:100%' src='image/{$r_image}'></img>";
+						echo "</div>";
+					}
+				?>
+				<textarea class='updatetext' name='content' placeholder='내용을 입력해주세요' style='width:60%; height:300px; margin-top:20px; display:flex; flex-direction:column; align-items:center; border:none; resize:none;' required>
+					<?php echo $r_content ?>
+				</textarea>
+			</div>
 			<input type='file' name='image' style='margin:10px 0px;' />
 			
 			<div style='display:flex; justify-content: space-between; width:100%; '>
@@ -20,4 +31,5 @@
 	</div>
 <?php
 	include('inc/footer.php');
+	require('./update_sql.php')
 ?>

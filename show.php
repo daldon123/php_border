@@ -2,6 +2,8 @@
 	$title = '글보기';
 	include('inc/header.php');
 	require('inc/function.php');
+	require('./show_sql.php');
+
 ?>
 	<div class='showbody'>
 		<div class='showbox'>
@@ -14,8 +16,10 @@
 				<p style= 'width:80%;'>[ <?php echo $shwo_row['name'] ?> ]</p>
 			</div>
 			<div class='showboxscontent'>
-				<p style='width:20%;display:flex;align-items:center;justify-content:center;'>본문:</p>
-				<pre style='width:60%; margin-left:10%; margin-right:10%; display:flex; flex-direction:column;'>
+				<div style='width:20%;'>
+					<p style='display:flex;align-items:center;justify-content:center;'>본문:</p>
+				</div>
+				<pre style='width:75%; margin-right:5%; display:flex; flex-direction:column;'>
 				<?php
 					if($shwo_row['image']){
 						echo "<img src='image/{$shwo_row['image']}'></img>";
