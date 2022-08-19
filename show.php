@@ -16,13 +16,13 @@
 				<p style= 'width:80%;'>[ <?php echo $shwo_row['name'] ?> ]</p>
 			</div>
 			<div class='showboxscontent'>
-				<div style='width:20%;'>
-					<p style='display:flex;align-items:center;justify-content:center;'>본문:</p>
+				<div style='width:20%; border-right:1px solid black; display:flex;align-items:center;justify-content:center;'>
+					<p>본문:</p>
 				</div>
-				<pre style='width:75%; margin-right:5%; display:flex; flex-direction:column;'>
+				<pre style='width:76%; margin:2%; display:flex; flex-direction:column; padding-bottom:30px;'>
 				<?php
 					if($shwo_row['image']){
-						echo "<img src='image/{$shwo_row['image']}'></img>";
+						echo "<img style='margin-bottom:10px;' src='image/{$shwo_row['image']}'></img>";
 					}
 					echo $shwo_row['content'];
 				?>

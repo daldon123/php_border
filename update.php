@@ -24,7 +24,7 @@
 			<input type='file' name='image' style='margin:10px 0px;' />
 			
 			<div style='display:flex; justify-content: space-between; width:100%; '>
-				<input type='submit' value='글쓰기' >
+				<input type='submit' value='수정하기' >
 				<input type='button' value='목록으로 돌아가기' onclick="window.location.href='index.php'">
 			</div>
 		</form>

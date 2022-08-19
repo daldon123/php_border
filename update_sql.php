@@ -26,7 +26,7 @@
 			if($title == true && $name == true && $content == true){
 				mysqli_query($db, $update_sql1);
 				@unlink("./image/{$r_image}");
-				Header("Location:./index.php");
+				Header("Location:./show.php?id={$id}");
 			}
 		}else{
 			$update_sql2 = "update table01 set title='{$title}', name='{$name}', content='{$content}', image='{$r_image}' where id={$id}";
