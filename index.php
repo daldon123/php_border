@@ -1,7 +1,6 @@
 <?php
 	$title = '게시판';
 	include('inc/header.php');
-	require('inc/function.php');
 	require('./index_sql.php');
 ?>
 	<!-- 게시판 -->

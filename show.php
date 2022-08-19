@@ -1,9 +1,7 @@
 <?php
 	$title = '글보기';
 	include('inc/header.php');
-	require('inc/function.php');
 	require('./show_sql.php');
-
 ?>
 	<div class='showbody'>
 		<div class='showbox'>
@@ -31,7 +29,7 @@
 		</div>
 		<div class='showbox2'>
 			<a class='backbtn' href='update.php?id=<?php echo $id ?>&&title=<?php echo $x_title ?>&&name=<?php echo $x_name ?>&&image=<?php echo $x_image ?>&&content=<?php echo $x_content ?>'>글수정</a>
-			<a class='backbtn' href='del.php?id=<?php echo $id ?>'>글삭제</a>
+			<a class='backbtn' href='del_sql.php?id=<?php echo $id ?>'>글삭제</a>
 			<a class='backbtn' href='index.php'>목록으로 돌아가기</a>
 		</div>
 	</div>

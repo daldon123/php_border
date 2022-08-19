@@ -1,4 +1,6 @@
 <?php
+	require('inc/function.php');
+
 	$title = $_POST['title'];
 	$name = $_POST['name'];
 	$content = $_POST['content'];
@@ -32,7 +34,7 @@
 			$update_sql2 = "update table01 set title='{$title}', name='{$name}', content='{$content}', image='{$r_image}' where id={$id}";
 			echo $update_sql2;
 			mysqli_query($db, $update_sql2);
-			Header("Location:./index.php");
+			Header("Location:./show.php?id={$id}");
 		}
 
 	}

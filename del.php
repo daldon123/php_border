@@ -1,8 +1,6 @@
 <?php
-	$title = '삭제하기';
+	$title = '';
 	include('inc/header.php');
-	require('inc/function.php');
-	require('./del_sql.php');
 ?>
 <script>
 	alert('삭제되었습니다');

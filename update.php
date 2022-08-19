@@ -1,10 +1,11 @@
 <?php
 	$title = '수정하기';
 	include('inc/header.php');
-	require('inc/function.php');
+	require('./update_sql01.php')
+		
 ?>
 	<div class='writebox'>
-		<form action="" method='post' class='writeFormbox' enctype="multipart/form-data">
+		<form action="update_sql02.php?id=<?php echo $id ?>" method='post' class='writeFormbox' enctype="multipart/form-data">
 			<label for='title'>제목</label>
 			<input type='text' id='title' name='title' placeholder='제목을 입력하세요' class='writeinput' value='<?php echo $r_title ?>' required/>
 			<label for='name'>닉네임</label>
@@ -17,9 +18,7 @@
 						echo "</div>";
 					}
 				?>
-				<textarea class='updatetext' name='content' placeholder='내용을 입력해주세요' style='width:60%; height:300px; margin-top:20px; display:flex; flex-direction:column; align-items:center; border:none; resize:none;' required>
-					<?php echo $r_content ?>
-				</textarea>
+				<textarea class='updatetext' name='content' placeholder='내용을 입력해주세요' style='width:60%; height:300px; margin-top:20px; display:flex; flex-direction:column; align-items:center; border:none; resize:none;' required><?php echo $r_content ?></textarea>
 			</div>
 			<input type='file' name='image' style='margin:10px 0px;' />
 			
@@ -31,5 +30,5 @@
 	</div>
 <?php
 	include('inc/footer.php');
-	require('./update_sql.php')
+	// require('./update_sql02.php')
 ?>
