@@ -1,5 +1,9 @@
 <?php
-	require('inc/function.php');
+	require('inc/function.php'); 
+	// 기존 db 연결
+
+	include('./db/db.php');
+
 
 	$page = isset($_GET['page'])? $_GET['page'] : 1; // 현재 페이지 번호
 	// 변수 출력
@@ -7,19 +11,24 @@
 	$cnt = $start + 1; // 글번호
 
 	// *게시판 변수*
-	$write_sql = "select * from table01 where title like '%".$_GET["search"]."%' order by id desc limit {$start},20"; // 게시판의 데이터,검색기능 쿼리문
-	$write_res = mysqli_query($db, $write_sql);
-	echo $write_sql;
+	// $write_sql = "select * from table01 where title like '%".$_GET["search"]."%' order by id desc limit {$start},20"; // 게시판의 데이터,검색기능 쿼리문
+	// $write_res = mysqli_query($db, $write_sql);
+	// echo $write_sql;
+	// 기존 db 커넥트 	
+	$sqls = $db->query("select * from table01 where title like '%".$_GET["search"]."%' order by id desc limit {$start},20")->fetchAll();
+
+
+	$accounts = $db->query('select id from table01');
+	echo $accounts->numRows(); // 전체 데이터
 
 	// *페이징 변수*
-	$page_sql = "select count(id) from table01"; //페이지 데이터의 갯수를 가져오는 쿼리문
-	$page_res = mysqli_query($db, $page_sql);
-	$total = mysqli_fetch_array($page_res);
-	$num = $total['count(id)']; // 전체 데이터 수
+	// $page_sql = "select count(id) from table01"; //페이지 데이터의 갯수를 가져오는 쿼리문
+	// $page_res = mysqli_query($db, $page_sql);
+	// $total = mysqli_fetch_array($page_res);
+	// $num = $total['count(id)']; // 전체 데이터 수
+	$num = $accounts->numRows();
 	// $list_num = 20;  // 한페이지에 보여줄 데이터 수
 	// $page_num = 20;   // 한블럭당 페이지 수
-
-	
 
 	$total_page = ceil($num / 20);  //  총 페이지 수 = 전체 데이터 수 / 페이지당 데이터 수
 	$total_block = ceil($total_page / 20); // 총 블럭 수 = 페이지 수 / 블럭 당 페이지 수

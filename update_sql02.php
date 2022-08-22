@@ -1,9 +1,13 @@
 <?php
-	require('inc/function.php');
+	// require('inc/function.php');
+
+	$id = $_GET['id']; // 데이터 id값
+	include('./db/db.php');
 
 	$title = $_POST['title'];
 	$name = $_POST['name'];
 	$content = $_POST['content'];
+
 
 				
 	if($title == true && $name == true && $content == true){
@@ -22,18 +26,19 @@
 		   move_uploaded_file($_FILES['image']['tmp_name'],$dir.$newImage);
 		   chmod($dir.$newImage,0777);
 
-			$update_sql1 = "update table01 set title='{$title}', name='{$name}', content='{$content}', image='{$newImage}' where id={$id}";
-
-			echo $update_sql1;
+			$sqls = $db->query("update table01 set title='{$title}', name='{$name}', content='{$content}', image='{$newImage}' where id={$id})");
+			
 			if($title == true && $name == true && $content == true){
-				mysqli_query($db, $update_sql1);
+				echo $sqls->affectedRows();
+				// mysqli_query($db, $update_sql1);
 				@unlink("./image/{$r_image}");
 				Header("Location:./show.php?id={$id}");
 			}
 		}else{
-			$update_sql2 = "update table01 set title='{$title}', name='{$name}', content='{$content}', image='{$r_image}' where id={$id}";
-			echo $update_sql2;
-			mysqli_query($db, $update_sql2);
+			// $update_sql2 = "update table01 set title='{$title}', name='{$name}', content='{$content}', image='{$r_image}' where id={$id}";
+			$sqls = $db->query("update table01 set title='{$title}', name='{$name}', content='{$content}', image='{$r_image}' where id={$id}");
+			echo $sqls->affectedRows();
+			// mysqli_query($db, $update_sql2);
 			Header("Location:./show.php?id={$id}");
 		}
 

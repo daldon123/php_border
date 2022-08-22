@@ -3,5 +3,4 @@
 	// db connect
 
 	$id = $_GET['id']; // 데이터 id값
-
 ?>

@@ -7,11 +7,11 @@
 		<div class='showbox'>
 			<div class='showboxs'>
 				<p style='width:20%;display:flex;align-items:center;justify-content:center;'>제목:</p>
-				<p style= 'width:80%;'>[ <?php echo $shwo_row['title']?> ]</p> 
+				<p style= 'width:80%;'>[ <?= $sqls['title'] ?> ]</p> 
 			</div>
 			<div class='showboxs'>
 				<p style='width:20%;display:flex;align-items:center;justify-content:center;'>작성자:</p>
-				<p style= 'width:80%;'>[ <?php echo $shwo_row['name'] ?> ]</p>
+				<p style= 'width:80%;'>[ <?=$sqls['name']?> ?> ]</p>
 			</div>
 			<div class='showboxscontent'>
 				<div style='width:20%; border-right:1px solid black; display:flex;align-items:center;justify-content:center;'>
@@ -19,10 +19,10 @@
 				</div>
 				<pre style='width:76%; margin:2%; display:flex; flex-direction:column; padding-bottom:30px;'>
 				<?php
-					if($shwo_row['image']){
-						echo "<img style='margin-bottom:10px;' src='image/{$shwo_row['image']}'></img>";
+					if($sqls['image']){
+						echo "<img style='margin-bottom:10px;' src='image/{$sqls['image']}'></img>";
 					}
-					echo $shwo_row['content'];
+					echo $sqls['content'];
 				?>
 				</pre>
 			</div>

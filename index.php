@@ -11,24 +11,20 @@
 				<th style='width:10%;'>ID</th>
 				<th style='width:50%;'>Title</th>
 				<th style='width:10%;'>Name</th>
-				<th style='width:20%;'>Content</th>
+				<th style='width:20%;'>Time</th>
 			</tr>
-			<?php
-				while($row = mysqli_fetch_array($write_res)){
-			?>
+			<?php foreach($sqls as $sql){ ?>
 			<tr>
-				<td><?php echo $row['id'] ?></td>
+				<td><?=$sql['id']?></td>
 				<td>
-					<a class='titlea' href="show.php?id=<?php echo $row['id'] ?>">
-						<?php echo $row['title'] ?>
+					<a class='titlea' href="show.php?id=<?php echo $sql['id'] ?>">
+						<?=$sql['title']?>
 					</a>
 				</td>
-				<td><?php echo $row['name'] ?></td>
-				<td><?php echo $row['time'] ?></td>
+				<td><?=$sql['name']?></td>
+				<td><?=$sql['time']?></td>
 			</tr>
-			<?php 
-				} 
-			?>
+			<?php } ?>
 		</table>	
 	</div>
 	<!-- /게시판 -->

@@ -30,5 +30,5 @@
 	</div>
 <?php
 	include('inc/footer.php');
-	// require('./update_sql02.php')
+	require('./update_sql02.php')
 ?>
