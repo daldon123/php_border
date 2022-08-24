@@ -1,11 +1,22 @@
 *{
 	margin:0px;
-
 }
 a:link{
 	text-decoration:none;
 }
-.titleh2{
+table{
+	background-color: rgb(80, 80, 80);
+}
+tr,th,td{
+	text-align:center;
+	vertical-align : middle;
+	color: white;
+}
+td{
+	height: 100px;
+	align-items: center;
+}
+.title_h2{
 	width:500px;
 	text-align:center;
 	margin-left:auto;
@@ -13,19 +24,29 @@ a:link{
 	margin-bottom:10px;
 	margin-top:50px;
 }
-.sql{
-	width:500px;
-	text-align:center;
-	margin-left:auto;
-	margin-right:auto;
-	margin-bottom:50px;
-}
-.box{
+/* index */
+.index_box{
 	width:1000px;
 	margin-left:auto;
 	margin-right:auto;
 }
-.box2{
+.index_write_btn{
+	width:200px;
+	border:1px solid black;
+	padding:5px;
+	text-align:center;
+	color:black;
+	float:right;
+	margin-bottom:10px;
+}
+.index_write_btn:hover{
+	color:white;
+	background-color:black;
+}
+.white_a{
+	color:white;
+}
+.page_btn{
 	width:1000px;
 	margin-left:auto;
 	margin-right:auto;
@@ -33,14 +54,11 @@ a:link{
 	justify-content:center;
 	margin-bottom:20px;
 }
-.box2>a{
+.page_btn>a{
 	padding:3px;
 	color:black;
 }
-tr,th,td{
-	text-align:center;
-}
-.formbox{
+.search_box{
 	border:1px solid black;
 	border-radius:5px;
 	display:flex;
@@ -51,46 +69,53 @@ tr,th,td{
 	margin-left:auto;
 	margin-right:auto;
 }
-.formbox>form{
+.search_box>form{
 	padding:5px;
 }
-.write{
-	width:200px;
-	border:1px solid black;
-	padding:5px;
-	text-align:center;
-	color:black;
-	float:right;
-	margin-bottom:10px;
-}
-.write:hover{
-	color:white;
-	background-color:black;
-}
-.writebox{
-	width:100%;
-	display:flex;
-	flex-direction:column;
-	align-items:center;
-}
-.writeFormbox{
-	width:800px;
-	display:flex;
-	flex-direction:column;
-	align-items:center;
-}
-.writeinput{
-	width:100%;
-}
-.titlea{
-	color:white;
-}
-.showbody{
+
+/* write.php */
+.write_box{
 	width:1200px;
 	margin-left:auto;
 	margin-right:auto;
 }
+.write_topbox{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.write_topbox>label{
+	width: 100%;
+	text-align: left;
+}
+.write_topbox>input{
+	width: 100%;
+}
+.write_textarea{
+	width:100%; 
+	height:300px; 
+	margin-top:20px;
+}
+.write_btnbox1{
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+}
+.write_btnbox2{
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+/* show.php */
 .showbox{
+	width:1200px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.showbox_{
 	width:100%;
 	margin-left:auto;
 	margin-right:auto;
@@ -99,7 +124,60 @@ tr,th,td{
 	flex-direction:column;
 	align-items:center;
 }
-.showbox2{
+.title_box{
+	width:100% !important;
+	padding:10px 0px;
+	border-bottom:1px solid black;
+	display:flex;
+	justify-content:space-around;
+	text-align:center;
+}
+.title_box:nth-child(0){
+	width:20%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.title_box:nth-child(1){
+	width: 80%;
+}
+.name_box{
+	width:100%;
+	padding:10px 0px;
+	border-bottom:1px solid black;
+	display:flex;
+	justify-content:space-around;
+	text-align:center;
+}
+.name_box:nth-child(0){
+	width:20%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.name_box:nth-child(1){
+	width: 80%;
+}
+.content_box{
+	width:100%;
+	display:flex;
+	justify-content:space-between;
+	text-align:center;
+}
+.content_box_title{
+	width:20%; 
+	border-right:1px solid black; 
+	display:flex;align-items:center;
+	justify-content:center;
+}
+.content_box_content{
+	width:76%; 
+	margin:2%; 
+	display:flex; 
+	flex-direction:column; 
+	padding-bottom:30px;
+}
+.showbox_btn{
 	width:100%;
 	margin-left:auto;
 	margin-right:auto;
@@ -107,36 +185,77 @@ tr,th,td{
 	justify-content:flex-end;
 	align-items:center;
 }
-.showbox2>a{
+.showbox_btn>a{
+	color:black;
+	border:1px solid black;
+	float:right;
+}
+.showbox_btn>a{
 	margin-top:3px;
 	padding:3px;
 	border-radius:5px;
 	margin-left:5px;
 }
-.showboxs{
+
+/* update.php */
+.update_box{
 	width:100%;
-	padding:10px 0px;
-	border-bottom:1px solid black;
+	height: 100%;
 	display:flex;
-	justify-content:space-between;
-	text-align:center;
-	
-}
-.showboxscontent{
-	width:100%;
-	display:flex;
-	justify-content:space-between;
-	text-align:center;
-}
-/* .showboxscontent>p{
-	display:flex;
+	flex-direction:column;
 	align-items:center;
-} */
-.backbtn{
-	color:black;
-	border:1px solid black;
-	float:right;
 }
-.updatetext:focus{
+.update_box_form{
+	width:800px;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+.update_input{
+	width:100%;
+}
+.update_content{
+	width:100%;
+	min-height: 200px;
+	margin-top:20px;
+	display:flex;
+	flex-direction:column; 
+	align-items:center; 
+	border:1px solid black;
+}
+.update_image{
+	width: 60%;
+}
+.update_image>img{
+	width: 100%;
+}
+.update_text{
+	width:60%; 
+	height:300px; 
+	margin-top:20px; 
+	display:flex; 
+	flex-direction:column; 
+	align-items:center; 
+	border:none; 
+	resize:none;
+}
+.update_text:focus{
 	outline:none;
 }
+.update_btn{
+	display:flex; 
+	justify-content:space-between; 
+	width:100%;
+}
+
+
+
+.exception{
+
+	text-align: center;
+}
+
+
+
+
+

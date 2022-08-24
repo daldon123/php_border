@@ -1,5 +1,4 @@
 <?php
-	$title = '';
 	include('inc/header.php');
 ?>
 <script>

@@ -1,5 +1,5 @@
 <?php
-class db {
+class Database {
 
     protected $connection;
 	protected $query;
@@ -131,11 +131,9 @@ class db {
 
 
 
-	$dbhost = 'localhost';
-	$dbuser = 'root';
-	$dbpass = '123456';
-	$dbname = 'test01';
+	$dbhost = '192.168.0.251';
+	$dbuser = 'domebon_mall';
+	$dbpass = 'vmfk##77';
+	$dbname = 'hong';
 
-	$db = new db($dbhost, $dbuser, $dbpass, $dbname);
-
-?>
+	$db = new Database($dbhost, $dbuser, $dbpass, $dbname);

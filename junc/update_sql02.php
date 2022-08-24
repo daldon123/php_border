@@ -17,9 +17,6 @@
 		   $imageName = $imageNameSlice[0];
 		   $imageType = $imageNameSlice[1];
 		   $image_ext = array('jpg','jpeg','gif','png');
-		   if(array_search($imageType,$image_ext) === false){
-			   errMsg('jpg, jpeg, gif, png 확장자만 가능합니다.');
-		   }
 		   $dates = date("mdhis",time());
 		   $newImage = chr(rand(97,122)).chr(rand(97,122)).$dates.rand(1,9).".".$imageType;
 		   $dir = "image/";

@@ -10,4 +10,4 @@
 	<title><?= $title ?></title>
 </head>
 <body>
-	<h1 class='titleh2'><?= $title ?></h1>
+	<h1 class='title_h2'><?= $title ?></h1>

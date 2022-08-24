@@ -1,5 +1,5 @@
 <?php
-	require('inc/function.php'); 
+	// require('inc/function.php'); 
 	// 기존 db 연결
 
 	include('./db/db.php');
@@ -15,11 +15,11 @@
 	// $write_res = mysqli_query($db, $write_sql);
 	// echo $write_sql;
 	// 기존 db 커넥트 	
+
 	$sqls = $db->query("select * from table01 where title like '%".$_GET["search"]."%' order by id desc limit {$start},20")->fetchAll();
 
-
 	$accounts = $db->query('select id from table01');
-	echo $accounts->numRows(); // 전체 데이터
+	// echo $accounts->numRows(); // 전체 데이터
 
 	// *페이징 변수*
 	// $page_sql = "select count(id) from table01"; //페이지 데이터의 갯수를 가져오는 쿼리문
