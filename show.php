@@ -1,8 +1,7 @@
 <?php
 	$title = '글보기';
-	include('db/db.php');
+	include('helper.php');
 	include('inc/header.php');
-	include('inc/helper.php');
 
 	$view_Board = new Board();
 	$re 		= $view_Board->view();
@@ -25,7 +24,7 @@
 				</div>
 				<div class="content_box_content">
 					<?php if($view['image']): ?>
-						<img style='margin-bottom:10px;' src='image/<?php echo $view['image']; //본문 이미지파일 ?>' />
+						<img class="show_img" src='image/<?php echo $view['image']; //본문 이미지파일 ?>' />
 					<?php endif; ?>
 					<?php echo $view['content']; //본문 텍스트 ?>
 				</div>
@@ -33,10 +32,7 @@
 		</div>
 		<div class="showbox_btn">
 			<a href="update.php?id=<?php echo $id ?>" >글수정</a>
-			<form action="json.php?id=<?php echo $id ?>&&mode=del" method="post" >
-				<input type="hidden" name="img" value="<?php echo $view['image']; //삭제할 이미지 파일 ?>" />
-				<input type="submit" value="삭제하기" >
-			</form>
+			<a href="json.php?mode=del&&id=<?php echo $id ?>" >글삭제</a>
 			<a href='index.php'>목록으로 돌아가기</a>
 		</div>
 	</div>

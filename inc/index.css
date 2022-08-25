@@ -1,6 +1,9 @@
 *{
 	margin:0px;
 }
+body{
+	height: 1000px;
+}
 a:link{
 	text-decoration:none;
 }
@@ -72,7 +75,9 @@ td{
 .search_box>form{
 	padding:5px;
 }
-
+#list_img{
+	height: 80%;
+}
 /* write.php */
 .write_box{
 	width:1200px;
@@ -171,10 +176,12 @@ td{
 	justify-content:center;
 }
 .content_box_content{
-	width:76%; 
+	width:70%; 
+	height: 100%;
 	margin:2%; 
 	display:flex; 
 	flex-direction:column; 
+	align-items: center;
 	padding-bottom:30px;
 }
 .showbox_btn{
@@ -195,8 +202,20 @@ td{
 	padding:3px;
 	border-radius:5px;
 	margin-left:5px;
-}
 
+}
+.del_input{
+	padding: 3px;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 5px;
+	margin-top: 3px;
+	margin-left:5px;
+}
+.show_img{
+	width: 50%;
+
+}
 /* update.php */
 .update_box{
 	width:100%;

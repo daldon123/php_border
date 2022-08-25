@@ -1,8 +1,7 @@
 <?php
 	$title = '게시판';
 
-	include('db/db.php');
-	include('inc/helper.php');
+	include('helper.php');
 	include('inc/header.php');
 
 	$objBoard = new Board();

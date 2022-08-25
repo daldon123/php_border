@@ -1,6 +1,9 @@
 <?php
 
+    include('db/db.php');
+
     class Board {
+
         public function lists() {
 
             try {
@@ -23,23 +26,27 @@
                 ## 데이터불러오기
                 $query = "
                     select 
-                    * 
+                        * 
                     from table01 
-                    {$where}
+                        {$where}
                     order by id desc
-                    {$limit}
+                        {$limit}
                 ";
-                $data   = $db->query($query)
-                           ->fetchAll();
+                $data   = $db->query($query)->fetchAll();
+                if($data == false) {
+                    throw new exception('데이터를 가져오는중에 오류가 발생했습니다.');
+                }
 
+                
                 ## 총개수
                 $query = "
                     select
-                    id
+                        id
                     from table01
-                    {$where}
+                        {$where}
                 ";
                 $total  = $db->query($query)->numRows();
+
 
                 ## 페이징
                 $blockSize      = 20;
@@ -61,6 +68,9 @@
 
             } catch(exception $e) {
                 
+                echo "<div class='exception'>";
+                echo $e;
+                echo "</div>";
             
             } finally {
 
@@ -76,29 +86,34 @@
 
                 ##데이터의 id값
                 $id = isset($_GET['id'])? $_GET['id'] : '';
-
-                ##예외처리
                 if(!$id){
                     throw new Exception('id값이 없습니다');
                 }
                 
+                ## 데이터 가져옴
                 $query = "
                     select 
-                    * 
-                    from table01 
-                    where id={$id}
+                        * 
+                    from table01 where 
+                        id={$id}
                 ";
-                $view = $db->query($query)->fetchArray();
-                
+                $data = $db->query($query)->fetchArray();
+                if($data == false) {
+                    throw new exception('글 내용을 가져오는중에 오류가 발생했습니다.');
+                }
+
+
                 ## 마무리
                  $result = [
-                     'view'    => $view,
+                     'view'    => $data,
                      'id'      => $id
                  ];
 
             } catch(Exception $e) {
 
+                echo "<div class='exception'>";
                 echo $e;
+                echo "</div>";
 
             } finally {
 
@@ -111,35 +126,43 @@
         public function modify() {
 
             try{
-
+                
                 global $db;
 
+                ##인덱스값
                 $id = isset($_GET['id'])? $_GET['id'] : '';
-
+                if(!$id){
+                    throw new Exception('id값이 없습니다');
+                }
+                
                 ##이전 데이터
                 $query    = "select * from table01 where id={$id}";
                 $data     = $db->query($query)->fetchArray();
-                $title    = isset($data['title'])? $data['title'] : false;
-                $name     = isset($data['name'])? $data['name'] : false;
-                $content  = isset($data['content'])? $data['content'] : false;
-                $image    = isset($data['image'])? $data['image'] : false;
-                
+                if($data == false) {
+                    throw new exception('내용을 가져오는중에 오류가 발생했습니다.');
+                }
+
                 ## 마무리
                 $result = [
-                    'id'       =>  $id,
-                    'title'     =>  $title,
-                    'name'      =>  $name,
-                    'content'   =>  $content,
-                    'image'     =>  $image
+                    'data' => $data,
+                    'id'   => $id,
                 ];
                 
+                
             } catch(exception $e) {
+
+                echo "<div class='exception'>";
                 echo $e;
+                echo "</div>";
+
             } finally {
+
                 return $result;
+
             }
 
         }
 
 
     }
+

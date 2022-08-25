@@ -1,5 +1,6 @@
 <?php
 
+	include('db/db.php');
     class BoardJson {
 
         public function write() {
@@ -8,23 +9,27 @@
 
                 global $db;
 
-                ## 데이터
-                $title   = isset($_POST['title'])? $_POST['title'] : false;
-                $name    = isset($_POST['name'])? $_POST['name'] : '';
-                $content = isset($_POST['content'])? $_POST['content'] : '';
-                $file    = $_FILES['image']['name'];
-
-                ##예외처리
-                if(!$title && !$name && !$content){
-
-                    throw new Exception('내용이 없습니다');
-
+                ## 제목
+                $title   = isset($_POST['title'])? $_POST['title'] : '';
+                if(empty($title) == true) {
+                    throw new exception('제목이 없습니다.');
                 }
 
+                ## 작성자
+                $name    = isset($_POST['name'])? $_POST['name'] : '';
+                if(empty($name) == true) {
+                    throw new exception('작성자가 없습니다.');
+                }
 
-                ## img파일
+                ## 내용
+                $content = isset($_POST['content'])? $_POST['content'] : '';
+                if(empty($content) == true) {
+                    throw new exception('내용이 없습니다.');
+                }
+                
+                ## 첨부파일
+                $file    = $_FILES['image']['name'];
                 if($file){
-
                     $imageFullName   = strtolower($_FILES['image']['name']);
                     $imageNameSlice  = explode(".",$imageFullName);
                     $imageType       = $imageNameSlice[1];
@@ -33,22 +38,31 @@
                     $dir             = "image/";
                     move_uploaded_file($_FILES['image']['tmp_name'],$dir.$newImage);
                     chmod($dir.$newImage,0777);
-
                 }
                                                                                                                     
-                if($title && $name && $content){
-
-                    $query = "
-                    insert into
-                    table01(title, content, time, name, image)
-                    values( '{$title}', '{$content}' , now() , '{$name}' ,'{$newImage}')
-                    ";
-
-                    $db->query($query)->affectedRows();
-
-                    Header("Location:index.php");
-
+                ## 글쓰기 등록
+                $query = "
+                    insert into table01 ( 
+                        title, 
+                        content, 
+                        time, 
+                        name, 
+                        image
+                    ) values( 
+                        '{$title}', 
+                        '{$content}', 
+                        now(), 
+                        '{$name}',
+                        '{$newImage}'
+                    )
+                ";
+                $re = $db->query($query)->affectedRows();
+                if($re != 1) {
+                    throw new exception('글 작성중에 오류가 발생했습니다.');
                 }
+                
+                ## 처리후 경로 이동
+                Header("Location:index.php");
 
             } catch(Exception $e) {
                 
@@ -68,63 +82,94 @@
 
                 global $db;
 
-                ##데이터
+                ## 인덱스
                 $id       = isset($_GET['id'])? $_GET['id'] : '';
-                $title    = isset($_POST['title'])? $_POST['title'] : '';
-                $name     = isset($_POST['name'])? $_POST['name'] : '';
-                $content  = isset($_POST['content'])? $_POST['content'] : '';
-                $image    = isset($_POST['img'])? $_POST['img'] : '';
-            
-                ##예외처리
-                if(!$title && !$name && !$content){
-
-                    throw new Exception('내용이 없습니다');
-
+                if(empty($id) == true) {
+                    throw new Exception('잘못된 정보입니다');
                 }
+                
+                ## 제목
+                $title    = isset($_POST['title'])? $_POST['title'] : '';
+                if(empty($title) == true) {
+                    throw new Exception('제목이 없습니다');
+                }
+
+                ## 작성자
+                $name     = isset($_POST['name'])? $_POST['name'] : '';
+                if(empty($name) == true) {
+                    throw new Exception('작성자가 없습니다');
+                }
+
+                ## 내용
+                $content  = isset($_POST['content'])? $_POST['content'] : '';
+                if(empty($content) == true) {
+                    throw new Exception('내용이 없습니다');
+                }
+
+                ## 첨부파일
+                $query ="
+                select 
+                    image 
+                from table01 where 
+                    id={$id}
+                ";
+                $image = $db->query($query)->fetchArray();
+                $img = isset($image['image']) ? $image['image'] : '';
+
             
-                ##저장할 데이터와 이미지 파일의 유무
-                if($_POST['title'] && $_POST['name'] && $_POST['content']){
-            
+                if($_FILES['image']['name']){
+                    ## 새 이미지파일이 전달된 경우
+                    $imageFullName  = strtolower($_FILES['image']['name']);
+                    $imageNameSlice = explode(".",$imageFullName);
+                    $imageType      = $imageNameSlice[1];
+                    $dates          = date("mdhis",time());
+                    $newImage       = chr(rand(97,122)).chr(rand(97,122)).$dates.rand(1,9).".".$imageType;
+                    $dir            = "image/";
+                    move_uploaded_file($_FILES['image']['tmp_name'],$dir.$newImage);
+                    chmod($dir.$newImage,0777);
                     
-                    if($_FILES['image']['name']){
-                        //새 이미지파일이 전달된 경우
-                        $imageFullName  = strtolower($_FILES['image']['name']);
-                        $imageNameSlice = explode(".",$imageFullName);
-                        $imageType      = $imageNameSlice[1];
-                        $dates          = date("mdhis",time());
-                        $newImage       = chr(rand(97,122)).chr(rand(97,122)).$dates.rand(1,9).".".$imageType;
-                        //저장된 파일명
-                        $dir            = "image/";
-                        move_uploaded_file($_FILES['image']['tmp_name'],$dir.$newImage);
-                        chmod($dir.$newImage,0777);
-                                
-                        $query ="
+                    ## 글쓰기 수정
+                    $query ="
                         update table01 set 
-                        title='{$title}',
-                        name='{$name}', 
-                        content='{$content}', 
-                        image='{$newImage}' 
-                        where id={$id}
-                        ";
-                        $db->query($query)->affectedRows();
-            
-                        @unlink("./image/{$image}");
-                        Header("Location:show.php?id={$id}");
-            
-                    }else{
-                        $query ="
-                        update table01 set 
-                        title='{$title}',
-                        name='{$name}', 
-                        content='{$content}', 
-                        image='{$image}' 
-                        where id={$id}
-                        ";
-                        $db->query($query)->affectedRows();
-                        Header("Location:show.php?id={$id}");
+                            title='{$title}',
+                            name='{$name}', 
+                            content='{$content}', 
+                            image='{$newImage}' 
+                            where id={$id}
+                    ";
+                    $re = $db->query($query)->affectedRows();
+                    if($re != 1) {
+                        throw new exception('글 수정중에 오류가 발생했습니다.');
                     }
 
+                    ## 기존 이미지 삭제
+                    if(empty($img) == false) {
+                        @unlink("C:/git/domebon/public_html/php_border/image/{$img}");
+                    }
+
+                    ## 처리후 주소 이동
+                    Header("Location:show.php?id={$id}");
+        
+                }else{
+                    ## 이미지 파일을 그대로 사용할 경우, 글쓰기 수정
+                    $query ="
+                        update table01 set 
+                            title='{$title}',
+                            name='{$name}', 
+                            content='{$content}', 
+                            image='{$img}' 
+                            where id={$id}
+                    ";
+                    $re = $db->query($query)->affectedRows();
+                    if($re != 1) {
+                        throw new exception('글 수정중에 오류가 발생했습니다.');
+                    }
+
+                    ## 처리후 주소 이동
+                    Header("Location:show.php?id={$id}");
                 }
+
+            
                 
             } catch(exception $e) {
 
@@ -143,22 +188,41 @@
             try {
 
                 global $db;
-
-                ##삭제할 데이터
+                
+                ##삭제할 데이터 인덱스
                 $id     = isset($_GET['id'])? $_GET['id'] : '';
-                $image  = isset($_POST['img'])? $_POST['img'] : '';
+                if(empty($id) == true) {
+                    throw new Exception('잘못된 정보입니다');
+                }
 
-                ##예외처리
-                if(!$id){
-                    throw new Exception('본문내용이 잘못되었습니다');
-                }                
-
-                $query  ="
-                delete from table01 where id={$id}
+                ## 데이터확인
+                $query = "
+                select 
+                    * 
+                from table01 
+                where id={$id}
                 ";
-                $db->query($query)->affectedRows();;
+                $tRow = $db->query($query)->fetchArray();
+                if(empty($tRow) == true) {
+                    throw new exception('삭제할 데이터를 찾을 수 없습니다.');
+                }
 
-                @unlink("./image/{$image}");
+                ## 글 삭제
+                $query  ="
+                    delete from table01 where id={$id}
+                ";
+                $re = $db->query($query)->affectedRows();
+                if($re != 1) {
+                    throw new exception('글 삭제중에 오류가 발생했습니다.');
+                }
+                
+                ## 이미지파일 삭제
+                $img = isset($tRow['image']) ? $tRow['image'] : '';
+                if(empty($img) == false) {
+                    @unlink("C:/git/domebon/public_html/php_border/image/{$img}");
+                }
+
+                ## 처리후 주소 이동
                 Header("Location:del.php");
 
             } catch(Exception $e) {
@@ -175,14 +239,15 @@
 
     }
 
+    
     $mode = $_GET['mode'] ?? '';
     if(empty($mode) == true) {
         die('잘못된 접속방식');        
     }
 
-	include('db/db.php');
     $objBoardJson = new BoardJson();
     
+    ## mode 실행 함수
     if($mode == 'write'){
         $objBoardJson->write();
     }
