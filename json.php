@@ -117,19 +117,26 @@ class BoardJson
             }
 
             ## 이전 첨부파일
-            $query = "
+            $x_file     = isset($_POST['x_file']) ? $_POST['x_file']  : '';
+            if($_POST['x_file'] == ''){
+                $query = "
                 select 
                     image 
                 from table01 where 
                     id={$id}
                 ";
-            $imageRow = $db->query($query)->fetchArray();
-            $prev_img = isset($imageRow['image']) ? $imageRow['image'] : '';
+                $imageRow = $db->query($query)->fetchArray();
+                $prev_img = isset($imageRow['image']) ? $imageRow['image'] : '';
+
+                ## 기존 이미지 삭제 요청시 삭제
+                @unlink("C:/git/domebon/public_html/php_border/{$prev_img}");
+            }
+
 
             ## 새 이미지파일이 전달된 경우
-            $file = $_FILES['image']['name'];
-            if ($file) {
-                $imageFullName  = strtolower($_FILES['image']['name']);
+            $image = isset($_FILES['image']['name'])? $_FILES['image']['name']:'';
+            if ($image) {
+                $imageFullName  = strtolower($image);
                 $imageNameSlice = explode(".", $imageFullName);
                 $imageType      = $imageNameSlice[1];
                 $dates          = date("mdhis", time());
@@ -140,8 +147,11 @@ class BoardJson
             }
 
             ## 이미지 파일 교체
-            $nowImage = isset($newImage) ? $dir.$newImage : $dir.$prev_img;
-
+            $nowImage = isset($newImage) ? $dir.$newImage : $dir.$x_file;
+            if($newImage){
+                ## 새파일이 들어올 경우 기존 이미지 삭제
+                @unlink("C:/git/domebon/public_html/php_border/{$x_file}");
+            }
 
             ## 글쓰기 수정
             $query = "
@@ -150,7 +160,7 @@ class BoardJson
                         name    ='{$name}', 
                         content ='{$content}', 
                         image   ='{$nowImage}',
-                        thum    ='{$nowImage}',
+                        thum    ='image/thum/thum.jpg',
                         modi    =modi+1
                         where id={$id};
                 ";
@@ -159,10 +169,7 @@ class BoardJson
                 throw new exception('글 수정중에 오류가 발생했습니다 .');
             }
 
-            ## 기존 이미지 삭제
-            if (empty($newImage) == false) {
-                @unlink("C:/git/domebon/public_html/php_border/image/{$prev_img}");
-            }
+
 
             ## 마무리
             $result = [
@@ -191,7 +198,7 @@ class BoardJson
             ##삭제할 데이터 인덱스
             $id     = isset($_POST['id']) ? $_POST['id'] : '';
             if (empty($id) == true) {
-                throw new Exception('잘못된 인덱스 정보입니다');
+                throw new Exception('잘못된 id값 입니다.');
             }
 
             foreach($id as $data) {
@@ -209,8 +216,8 @@ class BoardJson
 
                 ## 글 삭제
                 $query = "
-                delete from table01
-                where id = $data;
+                    delete from table01
+                    where id = $data;
                 ";
                 $re = $db->query($query)->affectedRows();
                 if ($re != 1) {

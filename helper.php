@@ -14,7 +14,7 @@ class Board
 
             ## 페이지
             $page       = isset($_GET['page']) ? $_GET['page'] : 1;
-            $pageSize   = isset($_GET['list']) ? $_GET['list'] : 5;
+            $pageSize   = isset($_GET['pageSize']) ? $_GET['pageSize'] : 5;
             $limitSt    = ($page - 1) * $pageSize;
             $limit      = "limit {$limitSt}, {$pageSize}";
 
@@ -54,16 +54,19 @@ class Board
             if($last_page > $total_page){
                 $last_page = $total_page;
             }
-
+            $listNum	= $total - (($page - 1) * $pageSize);
+            
             ## 마무리
             $result = [
                 'data'          => $data,
                 'total_page'    => $total_page,
                 'page'          => $page,
                 'pageSize'      => $pageSize,
-                'nblock'        => $now_block,
+                'now_block'     => $now_block,
                 'total'         => $total,
                 'last_page'     => $last_page,
+                'search'        => $search,
+                'listNum'       => $listNum,
             ];
             
         } catch (exception $e) {

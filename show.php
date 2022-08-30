@@ -12,13 +12,11 @@ $id   		= isset($re['id']) ? $re['id'] : '';
 	<div class="showbox_">
 		<div class="title_box">
 			<p>제목:</p>
-			<p>[ <?php echo $view['title']; //제목 
-					?> ]</p>
+			<p>[ <?php echo $view['title']; //제목 ?> ]</p>
 		</div>
 		<div class="name_box">
 			<p>작성자:</p>
-			<p>[ <?php echo $view['name']; //작성자이름
-					?> ]</p>
+			<p>[ <?php echo $view['name']; //작성자이름	?> ]</p>
 		</div>
 		<div class="content_box">
 			<div class="content_box_title">
@@ -26,11 +24,9 @@ $id   		= isset($re['id']) ? $re['id'] : '';
 			</div>
 			<div class="content_box_content">
 				<?php if ($view['image']) : ?>
-					<img class="show_img" src='<?php echo $view['image']; //본문 이미지파일 
-												?>' />
+				<img class="show_img" src='<?php echo $view['image']; //본문 이미지파일 ?>' />
 				<?php endif; ?>
-				<?php echo $view['content']; //본문 텍스트 
-				?>
+				<?php echo $view['content']; //본문 텍스트 ?>
 			</div>
 		</div>
 	</div>
@@ -52,7 +48,7 @@ $id   		= isset($re['id']) ? $re['id'] : '';
 			let result = [];
 			result[0] = $("#id").val();
 
-			confirm("삭제하시겠습니까?");
+			if(confirm("삭제하시겠습니까?") == false) return;
 
 			$.ajax({
 				type: "POST",
@@ -62,7 +58,6 @@ $id   		= isset($re['id']) ? $re['id'] : '';
 				},
 				dataType: "json",
 				success: function(result) {
-					console.log(result)
 					// 실패
 					if (result.success == false) {
 						alert(result.msg);

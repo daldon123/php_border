@@ -11,7 +11,7 @@ a:link{
 a:visited{
 	color: black;
 }
-.select_list{
+.pageSize{
 	border: 1px solid black;
 	width: 140px;
 	height: 36px;
@@ -57,7 +57,7 @@ td{
 	margin-bottom:10px;
 	background-color: white;
 }
-.index_write_btn2{
+.delete_checkbox{
 	width:100px;
 	background-color: white;
 	border:1px solid black;
@@ -73,14 +73,24 @@ td{
 	color:white;
 	background-color:black;
 }
-.index_write_btn2:hover{
+.delete_checkbox:hover{
 	color:white;
 	background-color:black;
 }
 .white_a{
 	color:white;
 }
-.page_btn{
+.empty{
+	width: 100%;
+	height: 200px;
+	background-color: rgb(182, 182, 182);
+	font-weight: bold;
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.paging{
 	width:1000px;
 	margin-left:auto;
 	margin-right:auto;
@@ -88,7 +98,7 @@ td{
 	justify-content:center;
 	margin-bottom:20px;
 }
-.page_btn>a{
+.paging>a{
 	padding:3px;
 	color:black;
 }
@@ -99,10 +109,13 @@ td{
 	display:flex;
 	align-items:center;
 	justify-content:center;
-	width:300px;
+	width:400px;
 	margin-left:auto;
 	margin-right:auto;
 	margin-bottom: 100px;
+}
+.search_text{
+	margin-right: 10px;
 }
 .search_box>form{
 	padding:5px;
@@ -125,6 +138,7 @@ td{
 .index_box_manu{
 	padding: 10px 10px;
 	background-color: rgb(135, 135, 135);
+	margin-bottom: 5px;
 }
 /* write.php */
 .write_box{
@@ -280,6 +294,36 @@ td{
 	border: 1px solid black;
 }
 /* update.php */
+.send_file{
+	width: 60%;
+}
+.filebox{
+	width: 100%;
+}
+.filebox label {
+	padding: 5px 0px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: black;
+	cursor: pointer;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+.filebox input[type="file"] {  /* 파일 필드 숨기기 */
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip:rect(0,0,0,0);
+	border: 0;
+}
+.update_image_text{
+	width: 30%;
+	margin: 0;
+}
 .update_box{
 	width:100%;
 	display:flex;
@@ -304,11 +348,21 @@ td{
 	align-items:center; 
 	border:1px solid black;
 }
+.update_bottom{
+	padding: 5px;
+	margin-top: 10px;
+	border: 1px solid black;
+	width: 800px;
+	display: flex;
+}
 .update_image{
-	width: 60%;
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .update_image>img{
-	width: 100%;
+	width: 50%;
 }
 .update_text{
 	width:60%; 
@@ -324,9 +378,14 @@ td{
 	outline:none;
 }
 .update_btn{
+	width: 50%;
 	display:flex; 
-	justify-content:space-between; 
-	width:100%;
+	flex-direction: column;
+	align-items: center;
+	justify-content:center;
+}
+.update_btn>input{
+	width: 60%;
 }
 
 
